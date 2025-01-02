@@ -1,0 +1,103 @@
+// ==UserScript==
+// @name         PTSimo
+// @namespace    https://openguessr.com/
+// @version      2.3
+// @description  Add a button to set location pin
+// @author       YourName
+// @license      MIT
+// @match        https://openguessr.com/*
+// @grant        none
+// ==/UserScript==
+
+(function () {
+    'use strict';
+
+    // Aspetta che la pagina sia completamente caricata
+    window.addEventListener('load', () => {
+        // Crea il pulsante con stile
+        const button = document.createElement('button');
+        button.innerHTML = '📍 Pin';
+        button.id = 'ptsimo-button';
+        button.style.cssText = `
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 99999;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        `;
+
+        // Effetti hover
+        button.addEventListener('mouseover', () => {
+            button.style.backgroundColor = '#45a049';
+            button.style.transform = 'translateY(-50%) scale(1.1)';
+        });
+
+        button.addEventListener('mouseout', () => {
+            button.style.backgroundColor = '#4CAF50';
+            button.style.transform = 'translateY(-50%)';
+        });
+
+        // Click handler
+        button.addEventListener('click', () => {
+            const iframe = document.querySelector('#PanoramaIframe');
+            if (!iframe?.src) {
+                console.log('Iframe non trovato');
+                return;
+            }
+
+            try {
+                const url = new URL(iframe.src);
+                const location = url.searchParams.get('location');
+                if (location) {
+                    const [lat, lng] = location.split(',').map(Number);
+                    console.log(`📍 Coordinate: ${lat}, ${lng}`);
+                    
+                    // Prima clicca il pulsante Guess per aprire la mappa
+                    const guessButton = document.querySelector('button[class*="guess"], button[class*="Guess"]');
+                    if (guessButton) {
+                        guessButton.click();
+                        
+                        // Aspetta che la mappa si apra
+                        setTimeout(() => {
+                            // Trova la mappa
+                            const map = document.querySelector('#map');
+                            if (map) {
+                                // Calcola la posizione del click sulla mappa
+                                const mapRect = map.getBoundingClientRect();
+                                const x = mapRect.left + (mapRect.width * (lng + 180) / 360);
+                                const y = mapRect.top + (mapRect.height * (90 - lat) / 180);
+
+                                // Simula il click sulla mappa
+                                const clickEvent = new MouseEvent('click', {
+                                    bubbles: true,
+                                    cancelable: true,
+                                    view: window,
+                                    clientX: x,
+                                    clientY: y
+                                });
+                                map.dispatchEvent(clickEvent);
+                                console.log('Pin posizionato sulla mappa');
+                            }
+                        }, 500); // Aspetta 500ms per permettere alla mappa di aprirsi
+                    }
+                }
+            } catch (error) {
+                console.error('Errore:', error);
+            }
+        });
+
+        // Aggiungi il pulsante alla pagina
+        document.body.appendChild(button);
+        console.log('PTSimo pulsante aggiunto');
+    });
+})();

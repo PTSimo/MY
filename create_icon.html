@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Icon</title>
+</head>
+<body>
+    <img id="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAUASURBVGiB7VlrTBxVFP7usLu8kUeBLc8FS0tLQUqhpS0v0WIr1kSt0WhibEyMGmNi/GOMiT9M/GOMMSb6w8QYY4wmakyMGo2JtQQQqEBLQaCUxyLQxQVW2F1gl33MzNz7+wOW3XXnzt0ZaKL2+zUz95zvnO/OnTvnnnsXuI7ruI7/MchqO5BS6pRSvgCgE0ALgHoAZgAqgAkAgwAuEEIuEkJmV3P+/wQgpawD8AqAJwFYdLoFAXwC4E1CyPBqIbAqAKSUjQDeB3CfQdcQgKcIIT+tBgbDAKSUFgBvAXgRgGGVlFICOA3gZULIvFE8hgBIKR0APgfQbtTHEi4DeJgQMm4EjCEAUsr7AHwJwGkE/zL4ATxACLlqBIheN1JKJ4DPsDaTB4A8AF9IKQ1FWq8bAfA2gNYk7WcBvAbgFIBfAcwBsAFoBPA4gCcANCXxbwXwDoAXdOJZHoSQpP8AHAagxvnnALwKwJLE3wrgHQDzcf5TAA4b8ZkQKWUWgN8B5C7T/AXgLkLIjF4sUsoWAN8DKFqmOQvgTkJIRC+epQh1I37yYQCdeiYPAISQqwDuBhBYprkTQKdePFqIMflpAMcJIUEjDgkhfwA4vkz1mhE8WgAeW/b7UyPOl+EkgMXF9x4p5W1GwCQEIKW8BUDz4u8ggC+NOF6KxTXz+bLiU0bwJIvAE8t+nyGEqEacL8MZxBLkk0bAJATAGNsXUzLGPjaIPwaEkAiAs4tFO2OsyQiehAAopVWMMRuAKgC/GXG6Aj4DIBhjdkppuREgCQEwxrYBACGkSEo5bcTpCvgTABhjFYyxrUaAJAQgpdwMAISQKSnlX0acroCrAEAIKZVSbjICJGEEGGNlAEAImZBSThpxuhwLyTIKAIyxCsbYZiM4EgJgjJUCAKV0Rkrp0etQSvkwgKcBtCGWfH8H8CEh5Pwy01nEkh8AUMaYIQDJcqEiAKCUzkkpZ/U4k1K+DuBDALcCyEcsF7oVwIdSyteXmc8CACGkQEpZoNfXUiRLYpsQy8QAgFBKp/U4klI+h1gyXIlnpZTPLyuHln7nSyn1Tn4JkgEoRCwjAwBVSunX40hK2Z6k6biUcseysi8hgHwp5QY9vpYiIQDGWB5iGRkAVErpjB5HjLHsJE02xphtWXkeACilOVJKQ5tbrQgUIJaRAQCU0jk9jhhjSSdGKZ1fVpxHLBeylJSUFBvBkSwCcwBAKfVLKQ3tPQghF5M0fUcI+XtZeR4AKKU+wzuiZADyEcvIAKBSSoN6HRFCPgXwI4AlG5QZAD8SQj5dZu4DAErprJTS0L1RMgB5iGVkAFCllLN6nS0eqT0M4AiAHwD8COAIIWT5+icAwE8pDTDGDN0cawGYp5TO63W2CORLAIaOzVaClDICAIQQvxEcyXKhXMQyMgColNIVz+8JIX8SQk4RQr4ghJxaCQCldI4xFmGMGboE0wKQg1hGBgBVSjmv19lKWMiFQoQQQ7mQFoBsxDIyAKiU0pBeZythIRcKMcYMRUALQBZiGRkAVCnlvF5nK2EhFwpTSg3lQloAshDLyACgUkoDep2thIVcKEwpNRQBLQCZiGVkAFAppUG9zlbCQi4UYYwZyoW0AGQglpEBQJVSzul1thIWcqEIY8xQLqQFwI5YRgYAlVI6p9fZSljIhVRKqaFcSAtAOmIZGQBUSmlIr7OVsJALRRljhnIhLQA2xDIyAKiU0nm9zlbCQi6kMsYM5UJaAGyIZWQAUBe/5P2vQAixEELs/zWO67iO6/gn/gYvNq+Sm8PkJQAAAABJRU5ErkJggg==">
+    <script>
+        // Quando l'immagine è caricata, scaricala come PNG
+        document.getElementById('icon').onload = function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = this.width;
+            canvas.height = this.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(this, 0, 0);
+            
+            const link = document.createElement('a');
+            link.download = 'icon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        };
+    </script>
+</body>
+</html> 

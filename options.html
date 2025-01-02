@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Impostazioni</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .option {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .precision-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input[type="number"] {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="option">
+        <label>
+            <input type="checkbox" id="showNotification">
+            Mostra notifiche con suono
+        </label>
+        <small style="display: block; color: #666; margin-top: 5px;">
+            Riproduce un suono quando viene posizionato il pin
+        </small>
+    </div>
+    <div class="option">
+        <label>
+            <input type="checkbox" id="buttonAnimation">
+            Animazione pulsante
+        </label>
+    </div>
+    <div class="option">
+        <label>Precisione del pin:</label>
+        <div class="precision-control">
+            <input type="number" id="pinPrecision" min="0.1" max="1" step="0.1" value="1">
+            <span>(0.1 = più preciso, 1 = meno preciso)</span>
+        </div>
+    </div>
+    <div class="option">
+        <label>
+            <input type="checkbox" id="safeMode">
+            Modalità sicura
+        </label>
+        <small style="display: block; color: #666; margin-top: 5px;">
+            Aggiunge piccole variazioni casuali alla posizione e ai tempi per evitare rilevamenti
+        </small>
+    </div>
+    <button id="save">Salva impostazioni</button>
+    <script src="options.js"></script>
+</body>
+</html> 

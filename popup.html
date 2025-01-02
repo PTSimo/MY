@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PTSimo Pin</title>
+    <style>
+        body {
+            width: 200px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .stats {
+            margin-bottom: 15px;
+        }
+        .stat-item {
+            margin-bottom: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="stats">
+        <div class="stat-item">
+            Pin piazzati: <span id="pinCount">0</span>
+        </div>
+        <div class="stat-item">
+            Ultima posizione: <span id="lastPosition">-</span>
+        </div>
+        <div class="stat-item">
+            Precisione media: <span id="avgPrecision">-</span>
+        </div>
+    </div>
+    <button id="options">⚙️ Impostazioni</button>
+    <script src="popup.js"></script>
+</body>
+</html> 
